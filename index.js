@@ -242,7 +242,7 @@ async function getPage(link) {
 }
 
 async function checkWhitelist(req, res, next) {
-    if (req.query.token && config.keyWhiteList.includes(req.query.token)) {
+    if (req.query.token && config.keyWhitelist.includes(req.query.token)) {
         next();
     } else {
         console.log(req.query.token, req.id, " is not authorised.");
