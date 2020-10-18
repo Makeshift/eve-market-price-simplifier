@@ -287,9 +287,9 @@ async function getccpAuth(req, res, next) {
 
 async function nukeCache(reason, errCode) {
     console.log("Nuking cache")
-    currentlyProcessing.map(job => {
-        job.reject([reason, errCode]);
-    })
+    for (const [key, value] of Object.entries(currentlyProcessing)) {
+        value.reject([reason, errCode])
+    }
     await Promise.all([
         db.set("structureCache", {}).write(),
         db.set("ccpAuth", {}).write()
