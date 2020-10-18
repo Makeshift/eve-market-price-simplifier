@@ -1,0 +1,20 @@
+version: '3'
+services:
+  market:
+    image: makeshift/eve-market2
+    build: .
+    restart: always
+    container_name: "eve-market2"
+    env_file:
+      - .env
+    labels:
+      - proxy.hosts=thetamarket2.makeshift.ninja,thetamarket2.local.makeshift.ninja,thetamarket2.public.makeshift.ninja
+      - proxy.port=80
+      - proxy.isPublic
+    networks:
+      - web
+#    volumes:
+#      - ./db.json:/usr/src/app/db.json
+networks:
+  web:
+    external: true

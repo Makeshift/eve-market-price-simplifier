@@ -1,0 +1,1 @@
+I tried to make a multithreaded version but it turns out Node is really slow at moving data between workers so it's completely pointless.
