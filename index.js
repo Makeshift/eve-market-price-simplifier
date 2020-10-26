@@ -290,6 +290,7 @@ async function nukeCache(reason, errCode) {
     for (const [key, value] of Object.entries(currentlyProcessing)) {
         value.reject([reason, errCode])
     }
+    currentlyProcessing = {};
     await Promise.all([
         db.set("structureCache", {}).write(),
         db.set("ccpAuth", {}).write()
