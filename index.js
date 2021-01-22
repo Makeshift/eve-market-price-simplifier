@@ -41,8 +41,13 @@ low(adapter).then(indb => {
         .through(compress())
         .post("/simple/citadel/:id/", checkWhitelist, parseBody, getccpAuth, catchCitadelLink, handleOngoing, getAllMarketData, handlePromises, filterItems, simplify, addEmpty, completeRequest)
         .post("/simple/station/:region/:id/", checkWhitelist, parseBody, catchStationLink, handleOngoing, getAllMarketData, filterRegion, handlePromises, filterItems, simplify, addEmpty, completeRequest)
+        .get("/healthcheck", healthcheck)
         .start();
 });
+
+function healthcheck(req, res) {
+    res.send("OK");
+}
 
 function addEmpty(req, res, next) {
     for (let item of req.body.item) {
